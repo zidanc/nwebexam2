@@ -38,19 +38,32 @@ include_once "base.php";
         <div id="mm">
         	<div class="hal" id="lef">
             	                	    <a class="blo" href="?do=po">分類網誌</a>
-               	                     	    <a class="blo" href="?do=news">最新文章</a>
-               	                     	    <a class="blo" href="?do=pop">人氣文章</a>
-               	                     	    <a class="blo" href="?do=know">講座訊息</a>
-               	                     	    <a class="blo" href="?do=que">問卷調查</a>
+																		<a class="blo" href="?do=news">最新文章</a>
+																		<a class="blo" href="?do=pop">人氣文章</a>
+																		<a class="blo" href="?do=know">講座訊息</a>
+																		<a class="blo" href="?do=que">問卷調查</a>
                	                 </div>
             <div class="hal" id="main">
             	<div>
             		
+                	<span style="width:80%; display:inline-block;">
+										<marquee>請民眾踴躍投稿電子報，讓電子報成為大家相互交流、分享的園地！詳見最新文章</marquee>	
+									</span>
                 	<span style="width:18%; display:inline-block;">
-                    	                    	<a href="?do=login">會員登入</a>
-                    	                    </span>
+										<a href="?do=login">會員登入</a>
+									</span>
                     	<div class="">
-                		                        </div>
+												<?php
+													$do=(!empty($_GET['do']))?$_GET['do']:"main";
+													$file="front/".$do.".php";
+													if(file_exists($file)){
+														include $file;
+													}else{
+														include "front/main.php";
+													}
+														
+												?>	
+											</div>
                 </div>
             </div>
         </div>
