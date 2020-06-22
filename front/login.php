@@ -25,7 +25,7 @@
   function login(){
     // let acc=document.querySelector("#acc").value 等於下方jQuery寫法
     let acc=$("#acc").val();
-    let acc=$("#pw").val();
+    let pw=$("#pw").val();
     if(acc=="" || pw==""){
       alert("帳號及密碼欄位不可為空白");
     }else{
@@ -33,7 +33,11 @@
         if(res==='1'){
           $.get("api/chk_pw.php",{acc,pw},function(res){
             if(res==='1'){
-              location.href="index.php";
+              if(acc==='admin'){
+                location.href="admin.php";
+              }else{
+                location.href="index.php";
+              }
             }else{
               alert("密碼錯誤");
               location.reload();

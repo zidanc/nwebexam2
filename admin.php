@@ -1,6 +1,5 @@
 ﻿<?php
 include_once "base.php";
-// print_r($_SESSION);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0039) -->
@@ -38,12 +37,12 @@ include_once "base.php";
         </div>
         <div id="mm">
         	<div class="hal" id="lef">
-            	                	    <a class="blo" href="?do=po">分類網誌</a>
-																		<a class="blo" href="?do=news">最新文章</a>
-																		<a class="blo" href="?do=pop">人氣文章</a>
-																		<a class="blo" href="?do=know">講座訊息</a>
-																		<a class="blo" href="?do=que">問卷調查</a>
-               	                 </div>
+						<a class="blo" href="?do=acc">帳號管理</a>
+						<a class="blo" href="?do=po">分類網誌</a>
+						<a class="blo" href="?do=news">最新文章管理</a>
+						<a class="blo" href="?do=que">問卷調查</a>
+						<a class="blo" href="?do=know">講座訊息</a>
+          </div>
             <div class="hal" id="main">
             	<div>
             		
@@ -80,7 +79,7 @@ include_once "base.php";
 													if(file_exists($file)){
 														include $file;
 													}else{
-														include "front/main.php";
+														include "admin/main.php";
 													}
 														
 												?>	
