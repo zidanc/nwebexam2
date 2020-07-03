@@ -16,15 +16,32 @@
   $now=(!empty($_GET['p']))?$_GET['p']:1;
   $start=($now-1)*$div;
   $rows=$db->all([],"order by good DESC limit $start,$div");
-
-  $rows=$db->all();
+  $log=new DB('log');
+  // $rows=$db->all();
   foreach($rows as $row){
 ?>
 
   <tr>
     <td><?=$row['title'];?></td>
     <td><?=mb_substr($row['text'],0,20,"utf8");?>...</td>
-    <td></td>
+    <td>
+    
+    <span></span>
+    
+    <?php
+        if(!empty($_SESSION['login'])){
+          // $db=new DB('log');
+          $chk=$log->count(['user'=>$_SESSION['login'],'news'=>$row['id']]);
+          if($chk>0){
+
+            echo "<a href='#' id='good".$row['id']."' onclick='good(".$row['id'].",2,&#39;".$_SESSION['login']."&#39;)'>收回讚</a>";
+          }else{
+            
+            echo "<a href='#' id='good".$row['id']."' onclick='good(".$row['id'].",1,&#39;".$_SESSION['login']."&#39;)'>讚</a>";
+          }
+        }
+      ?>
+    </td>
   </tr>
 
 <?php
