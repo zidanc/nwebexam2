@@ -1,3 +1,13 @@
+<style>
+  .all{
+    display: none;
+  }
+  .title{
+    background: #eee;
+    cursor: pointer;
+  }
+</style>
+
 <fieldset>
   <legend>目前位置：首頁 > 最新文章區</legend>
 <table>
@@ -16,14 +26,31 @@
   $start=($now-1)*$div;
   $rows=$db->all([],"limit $start,$div");
 
-  $rows=$db->all();
+  $log=new DB('log');
   foreach($rows as $row){
 ?>
 
   <tr>
-    <td><?=$row['title'];?></td>
-    <td><?=mb_substr($row['text'],0,20,"utf8");?>...</td>
-    <td></td>
+    <td class="title"><?=$row['title'];?></td>
+    <td>
+      <div class="abbr"><?=mb_substr($row['text'],0,20,"utf8");?>...</div>
+      <div class="all"><?=nl2br($row['text']);?></div>   <!--nl: next line 都會斷行-->
+    </td>
+    <td>
+      <?php
+        if(!empty($_SESSION['login'])){
+          // $db=new DB('log');
+          $chk=$log->count(['user'=>$_SESSION['login'],'news'=>$row['id']]);
+          if($chk>0){
+
+            echo "<a href='#' id='good".$row['id']."' onclick='good(".$row['id'].",2,&#39;".$_SESSION['login']."&#39;)'>收回讚</a>";
+          }else{
+            
+            echo "<a href='#' id='good".$row['id']."' onclick='good(".$row['id'].",1,&#39;".$_SESSION['login']."&#39;)'>讚</a>";
+          }
+        }
+      ?>
+    </td>
   </tr>
 
 <?php
@@ -55,3 +82,13 @@ if(($now+1)<=$pages){
 
 
 </fieldset>
+
+<script>
+  $(".title").on("click",function(){
+    // console.log($(this).html());   這樣寫會有缺點，實驗看看。
+    $(this).next().children('.abbr').toggle();
+    $(this).next().children('.all').toggle();
+    
+
+  })
+</script>
