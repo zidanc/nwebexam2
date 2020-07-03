@@ -34,7 +34,7 @@ class DB{
 
 
     public function find($arg){
-      $sql="select * from $this->table";
+      $sql="select * from $this->table ";
     
       if(is_array($arg)) {
         foreach($arg as $key => $value){

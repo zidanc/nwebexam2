@@ -4,12 +4,19 @@
     padding: 5px;
     border: 1px solid black;
     margin-left: -5px;
+    cursor: pointer;
+    background: #ccc;
   }
   .post{
     border: 1px solid black;
     margin-left: -5px;
+    margin-top: -1px;
     width: 100%;
     display:none;
+  }
+  .tab2{
+    background: white;
+    border-bottom: 1px solid white;
   }
   .active{
     display: block;
@@ -128,6 +135,9 @@
 <script>
   $(".type").on("click",function(){
     let p=$(this).data('id')
+    $(".type").removeClass("tab2")
+    $(this).addClass('tab2')
+    // $(this).css("background-color","white")
     $(".post").removeClass("active")
     $("#p"+p).addClass("active");
   })
